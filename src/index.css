@@ -1,13 +1,353 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	line-height: 1;
+  font-size: 18px;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+}
+ol, ul {
+	list-style: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+:root {
+  --bright-blue: hsl(220, 98%, 61%);
+  --checkbox-focus: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+
+.light {
+  --page-background: hsl(0, 0%, 98%);
+  --list-background: #fff;
+  --font: hsl(235, 19%, 35%);
+  --button-background-image: url('./icon-moon.svg');
+  --background-image-mobile: url('./bg-mobile-light.jpg');
+  --background-image-desktop: url('./bg-desktop-light.jpg');
+  --border-bottom: hsl(233, 11%, 84%);
+  --checkbox: hsl(236, 33%, 92%);
+  --strikethrough: hsl(236, 9%, 61%)
+}
+
+.dark {
+  --page-background: hsl(235, 21%, 11%);
+  --list-background: hsl(235, 24%, 19%);
+  --font: hsl(234, 39%, 85%);
+  --button-background-image: url('./icon-sun.svg');
+  --background-image-mobile: url('./bg-mobile-dark.jpg');
+  --background-image-desktop: url('./bg-desktop-dark.jpg');
+  --border-bottom: hsl(234, 11%, 52%);
+  --checkbox: hsl(234, 39%, 85%);
+  --strikethrough: hsl(234, 11%, 52%);
+}
+
+li {
+  background: var(--list-background);
+  border-bottom: 1px solid var(--border-bottom);
+  padding: 10px 15px;
+}
+
+li:first-of-type {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+header {
+  background-image: var(--background-image-mobile);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: 1020px) {
+  header {
+    background-image: var(--background-image-desktop);
+  }
+}
+
+header button {
+  background-image: var(--button-background-image);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-color: transparent;
+  border: none;
+  width: 26px;
+  height: 26px;
+  margin: 50px 25px;
+}
+
+header h1 {
+  font-size: 30px;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 10px;
+  font-weight: 700;
+  margin: 50px 25px;
+}
+
+.App {
+  background: var(--page-background);
+  color: var(--font);
+  height: 100vh;
+  width: 100%;
+}
+
+.list-container {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: -90px;
+}
+
+input:focus {
+  outline: none;
+}
+
+form {
+  margin-bottom: 15px;
+  background-color: var(--list-background);
+  border-radius: 5px;
+  padding: 25px;
+}
+
+form input {
+  background-color: inherit;
+  border: none;
+}
+
+form input[type="text"] {
+  width: 90%;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.filters {
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  color: var(--strikethrough);
+}
+
+.todos-left,
+.clear-button {
+  background-color: var(--list-background);
+  width: 50%;
+  padding: 15px;
+}
+
+.todos-left {
+  border-bottom-left-radius: 5px;
+}
+
+.clear-button {
+  justify-content: flex-end;
+  display: flex;
+  border-bottom-right-radius: 5px;
+}
+
+.clear-button button {
+  font-weight: normal;
+}
+
+.filter-buttons {
+  width: 100%;
+  background-color: var(--list-background);
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 1020px) {
+  .todos-left,
+  .clear-button,
+  .filter-buttons {
+    width: 33.3333%;
+  }
+
+  .todos-left {
+    order: 1;
+  }
+
+  .clear-button {
+    order: 3;
+  }
+
+  .filter-buttons {
+    order: 2;
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.todo input[type="text"],
+::placeholder {
+  color: var(--strikethrough);
+}
+
+.todo input:focus {
+  color: var(--font);
+}
+
+/* Custom checkboxes */
+/*style wrapper to give some space*/
+.wrapper,
+.todo {
+	  position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*style label to give some more space*/
+.wrapper label {
+    display: block;
+    padding: 15px 0 15px 48px;
+}
+
+/*style and hide original checkbox*/
+.wrapper input,
+.todo input[type="checkbox"] {
+	height: 20px;
+	opacity: 0;
+	position: absolute;
+	top: 22px;
+  left: 21px;
+	width: 20px;
+  z-index: 1;
+}
+
+/*position new box*/
+.wrapper input + label::before,
+.todo input[type="checkbox"] + label::before {
+	border: 1px solid;
+	content: "";
+	height: 20px;
+	position: absolute;
+  left: 25px;
+	width: 20px;
+  border-radius: 50%;
+  color: var(--checkbox);
+}
+
+.wrapper input:hover + label::before,
+.todo input[type="checkbox"]:hover + label::before {
+  border: double 1px transparent;
+  border-radius: 50%;
+  background-image: linear-gradient(var(--list-background), var(--list-background)),
+                    var(--checkbox-focus);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  height: 19px;
+  width: 19px;
+}
+
+/*svg background styles*/
+.wrapper input + label::after,
+.todo input[type="checkbox"] + label::after  {
+	content: "";
+	opacity: 0;
+	background-repeat: no-repeat;
+  height: 22px;
+  width: 22px;
+  position: absolute;
+	left: 24px;
+	top: 24px;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/*reveal check for 'on' state*/
+.wrapper input:checked + label::after,
+.todo input[type="checkbox"]:checked + label::after  {
+  opacity: 1;
+  background-image: url("./icon-check.svg"), var(--checkbox-focus);
+  background-position: center;
+  border: 1px solid var(--list-background);
+  border-radius: 50%;
+}
+
+.wrapper input:checked + label {
+  text-decoration: line-through;
+  color: var(--strikethrough);
+}
+
+/*focus styles*/
+.wrapper input:focus + label::before,
+.todo input[type="checkbox"]:focus + label::after  {
+  outline: 3px solid transparent; /* For Windows high contrast mode. */
+}
+
+button {
+  background-color: var(--list-background);
+  border: none;
+  color: var(--strikethrough);
+  font-weight: bold;
+  font-size: 0.8rem;
+  font-family: inherit;
+}
+
+button:focus {
+  color: var(--bright-blue);
+  font-weight: bold;
+}
+
+.delete {
+  background: url("./icon-cross.svg") center no-repeat;
+  height: 30px;
+  width: 30px;
+  align-self: center;
+}
+
+@media screen and (min-width: 1020px) {
+  .delete {
+    opacity: 0;
+  }
+
+  .delete:hover {
+    opacity: 1;
+  }
+}
+
+input,
+.todos-left {
+  font-size: 0.9rem;
 }
